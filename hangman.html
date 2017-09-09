@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        var word = "carrotcake";
+        //word = word.split('');
+        var underscores = [];
+
+
+
+        do {
+            var user = prompt("Enter a letter").trim().toLowerCase();
+            underscores.length = word.length;
+
+            //underscores
+            for (var i = 0; i < word.length; i++) {
+                underscores = underscores + '_';
+            }
+            console.log(underscores);
+
+            console.log("User entered: " + user);
+            for (var i = 0; i < word.length; i++) {
+                if (word[i] === user) {
+                    console.log("You were correct!!!");
+
+                } else {
+                    console.log("Sorry! you were wrong!!!!");
+                }
+                // underscores.push('_');
+            }
+        } while (user != 'q')
+
+
+
+
+        //underscores //console.log(underscores.length==w ord.length) function checkLetter(letter) { // here
+        // we have to find out if the letter is in the word and if it is then replace the undersocre with the letter 
+        // for (var i = 0; i < word.length; i++) { // console.log(word[i]) if (letter===w ord[i]) { console.log( 'You are correct!') console.log(i) underscores[i]=w
+        //   ord[i]
+        //  } else {
+        //     console.log('You are wrong!')
+        //}
+
+
+        //  }
+        //}
+        //checkLetter('t') underscores checkLetter('c') underscores checkLetter('r') underscores checkLetter('o') underscores checkLetter('a') underscores
+        //if (underscores.includes('_') == f alse) {
+        //  console.log(
+        //    'Winner')
+        //} else {
+        //  console.log('not here yet')
+        //} //
+    </script>
+    </body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Guess what letter I'm thinking about?</title>
+
+    <!-- The Hangman game use key events to listen for the letters that your players will type 
+        Display the following on the page:
+        Press any key to get started
+        Wins: (# of times user guessed the word correctly)
+        If the word is madonna, display it like this when the game starts: _ _ _ _ _ _ _ _ _ _
+        As the user guesses the correct leffters, reveal them: m a d o _ _ a.
+        Number of Guesses Remaining: (# of guesses remaing for the user)
+        Letters Already Guessed: (Letters the user has guessed, displayed like L Z Y H)
+        After the user wins/loses the game should automatically choose another word and make the user play it. 
+    -->
+</head>
+
+<body>
+
+    <h1>The Hangman Game</h1>
+    <br>
+    <h2>Press any key to get started</h2>
+    <br>
+    <h2>Wins:<span id="win-count"></span></h2>
+    <br>
+    <h2>Current Word:<u><span id="current-word"></span></u></h2>
+    <br>
+    <h2>Number of Guesses Remaining is:<span id="guess-count"></span></h2>
+    <br>
+    <h2>Letters already guessed:<span id="user-text"></span></h2>
+
+    <script>
+        var maxTries = 10;
+        var winTotal = 0;
+        var lossTotal = 0;
+        var letterPicked = '';
+        var wordToGuess = "Florida";
+        var wordHolder = "";
+        var winCount = 0;
+        var lossCount = 0;
+        var guessAttemptCount = 0;
+        var correctGuessCount = 0;
+        var guessesLeft = 0;
+        var text = '';
+        var keyEntered = '';
+        var wordArray = ["          "];
+        var index;
+        var userText = document.getElementById("user-text");
+        var winCount = document.getElementById("win-count");
+        var wordHolder = document.getElementById("current-word");
+        var guessCount = document.getElementById("guess-count");
+
+        //for (index = 0; index < wordToGuess.length - 1; index++) {
+        //    wordArray = wordArray + '_';
+        //}
+
+
+        //console.log("Word: " + word);        
+        // sets the placeholder field for the word that is being guessed
+        document.getElementById("current-word").innerHTML = wordArray;
+        guessesLeft = wordToGuess.length;
+        //console.log("GuessesLeft = " + guessesLeft);
+        //wordHolder.textContent = word;
+
+        // Event handler for keyboard key presses
+        // It displays the pressed key and if it matches a letter in the word to guess, then the user wins and gets a point. 
+        // The number of chances the user has to guess is based on the number of letters in the word
+        document.onkeypress = function(event) {
+                userText.textContent = "KEY PRESSED";
+
+
+                //console.log("WordToGuess length = " + wordToGuess.length);
+
+                keyEntered = event.key;
+                text = event.key + text;
+                //console.log("keyEntered = " + keyEntered);
+
+                userText.textContent = text;
+                // console.log('VALUE OF TEXT', text[0]);
+                guessAttemptCount++;
+
+
+            } //end onkeypress event
+
+        // Event handler for the keyboard key up event
+        // It counts the number of guesses and if it reaches the max allowed, it calls the 
+        // gameover function 
+        document.onkeyup = function(event) {
+
+                if (guessAttemptCount === wordToGuess.length) {
+                    resetGame();
+                } else
+                if (guessesLeft > 0 && (guessesLeft < wordToGuess.length)) {
+                    if (wordToGuess.includes(keyEntered)) {
+
+                        // console.log("A correct letter has been guessed!!!!")
+                        correctGuessCount++;
+                        var location = wordToGuess.indexOf(keyEntered);
+                        console.log("location of letter: " + location);
+                        wordArray[location] = keyEntered;
+                        wordArray = wordArray + wordArray[location];
+                        console.log("WordArray = " + wordArray[location]);
+                        //document.write(wordArray);
+                    } //if keyentered is in the word to Guess 
+                } //if guessesleft
+
+                //guess++;
+                guessesLeft--;
+                //console.log("*** In the keyup event logic ***");
+                //console.log("guessesLeft = " + guessesLeft);
+                console.log("The right number of guesses = " + guess);
+                guessCount.textContent = guessesLeft.toString();
+
+            } //end onkeyup event
+
+        // The gameOver() function lets the user know whether or not he/she won or not.
+        // It posts the stats of Wins and instructs the user to refresh the browser to play again.  
+
+        function resetGame() {
+            alert("Branched to the resetGame function...");
+            console.log("winCount = " + winCount.textContent);
+            if (correctGuessCount === wordToGuess.length) {
+                alert("Congratulations! You guess the correct word. Refresh the browser to play the game again.");
+            } else {
+                alert("Sorry! You didn't the correct word. Refresh the browser to play the game again.");
+            } // check if you are a winner
+
+        } //end function resetGame
+    </script>
+
+</body>
+
+</html>
